@@ -1,0 +1,15 @@
+name: mc-aggregator
+
+services:
+  mc-aggregator:
+    image: python:3.11-slim
+    container_name: mc-aggregator
+    working_dir: /app
+    env_file: .env
+    volumes:
+      - ./app.py:/app/app.py
+    command: >
+      sh -c "pip install flask requests -q && python app.py"
+    ports:
+      - ${MC_AGGREGATOR_PORT?error}:5000
+    restart: unless-stopped
