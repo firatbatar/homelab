@@ -1,0 +1,23 @@
+name: portainer
+
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:lts
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - "${PORTAINER_HTTPS_PORT?error}:9443"
+      - "${PORTAINER_EDGE_PORT?error}:8000"
+    restart: always
+    
+
+volumes:
+  portainer_data:
+    name: portainer_data
+
+networks:
+  default:
+    name: portainer_network
