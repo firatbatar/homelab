@@ -1,0 +1,25 @@
+name: speedtest-tracker
+
+services:
+  speedtest:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    env_file: .env
+    environment:
+      - TZ=${TIMEZONE}
+      - APP_KEY=${SPEEDTEST_APP_KEY?error}
+      - APP_DEBUG=true
+      - SPEEDTEST_SCHEDULE=0 */4 * * *
+      - APP_URL=${SPEEDTEST_URL}
+      - PRUNE_RESULTS_OLDER_THAN=60
+    ports:
+      - ${SPEEDTEST_PORT?error}:80
+    volumes:
+      - ./speedtest-data:/config
+    healthcheck:
+      test: curl -fSs APP_URL/api/healthcheck | jq -r .message || exit 1
+      interval: 10s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+    restart: unless-stopped
