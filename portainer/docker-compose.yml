@@ -11,12 +11,6 @@ services:
     ports:
       - "${PORTAINER_HTTPS_PORT?error}:9443"
       - "${PORTAINER_EDGE_PORT?error}:8000"
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-check-certificate -qO- https://localhost:9443/api/status || exit 1"]
-      interval: 30s
-      retries: 3
-      start_period: 30s
-      timeout: 10s
     restart: always
     
 
