@@ -1,0 +1,27 @@
+name: jellyfin
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    env_file: .env    
+    environment:
+      - TZ=${TIMEZONE?error}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_DOMAIN_URL?error}
+    ports:
+      - ${JELLYFIN_PORT?error}:8096/tcp
+      - ${JELLYFIN_UDP_PORT?error}:7359/udp   # For server finding
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - type: bind
+        source: ${JELLYFIN_MEDIA_PATH?error}
+        target: /media
+        read_only: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+    restart: unless-stopped

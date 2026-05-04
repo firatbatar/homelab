@@ -1,3 +1,5 @@
 /.env
 speedtest-tracker/speedtest-data
 uptime-kuma/data
+jellyfin/cache
+jellyfin/config
