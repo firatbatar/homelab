@@ -1,0 +1,23 @@
+name: nginx-proxy-manager
+
+services:
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    env_file: .env
+    environment:
+      TZ: ${TIMEZONE}
+    ports:
+      - '80:80'            # Public HTTP Port
+      - '443:443'          # Public HTTPS Port
+      - '${NGINX_PORT}:81' # Admin Web Port
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:81/api/"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+    restart: unless-stopped

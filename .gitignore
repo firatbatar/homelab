@@ -4,3 +4,5 @@ uptime-kuma/data
 jellyfin/cache
 jellyfin/config
 pihole/etc-pihole
+nginx-proxy-manager/data
+nginx-proxy-manager/letsencrypt
