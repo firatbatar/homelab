@@ -12,4 +12,10 @@ services:
       sh -c "pip install flask requests -q && python app.py"
     ports:
       - ${MC_AGGREGATOR_PORT?error}:5000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/status')"]
+      interval: 30s
+      retries: 3
+      start_period: 60s
+      timeout: 10s
     restart: unless-stopped
