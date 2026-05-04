@@ -1,0 +1,16 @@
+server:
+  assets-path: /app/assets
+  proxied: true
+
+auth:
+  secret-key: ${GLANCE_SECRET_KEY}
+  users:
+    firatbatar:
+      password-hash: ${GLANCE_PASSWORD_HASH}
+
+theme:
+  custom-css-file: /assets/user.css
+
+pages:
+  - $include: hub.yml
+  - $include: home.yml
