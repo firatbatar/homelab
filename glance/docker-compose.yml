@@ -10,6 +10,13 @@ services:
       - ./assets:/app/assets
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/ext_ssd1:/mnt/ext_ssd1:ro
     ports:
       - ${GLANCE_PORT?error}:8080
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
     restart: unless-stopped

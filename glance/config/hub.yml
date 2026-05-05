@@ -6,6 +6,14 @@
           servers:
             - type: local
               name: Server
+              hide-mountpoints-by-default: true
+              mountpoints:
+                "/":
+                  hide: false
+                  name: Main SSD
+                "/mnt/ext_ssd1":
+                  hide: false
+                  name: External SSD
         
         - type: dns-stats
           service: pihole-v6
@@ -14,7 +22,7 @@
 
         - type: repository
           token: ${GITHUB_READONLY_TOKEN}
-          repository: firatbatar/firatbatar.github.io
+          repository: firatbatar/homelab
           pull-requests-limit: 5
           issues-limit: 3
           commits-limit: 3
@@ -162,51 +170,50 @@
               shortcut: "!gh"
               url: https://github.com/search?q={QUERY}&type=repositories
         
-        - type: group
-          widgets:
-            - type: monitor
-              cache: 1m
-              title: Services
-              sites:
-                - title: Portainer
-                  url: ${PORTAINER_DOMAIN_URL}
-                  check-url: ${PORTAINER_DOMAIN_URL}  # For some reaseon bare url is rejected
-                  icon: ${PORTAINER_ICON}
+        - type: monitor
+          cache: 1m
+          title: Services
+          sites:
+            - title: Portainer
+              url: ${PORTAINER_DOMAIN_URL}
+              check-url: ${PORTAINER_DOMAIN_URL}  # For some reaseon bare url is rejected
+              icon: ${PORTAINER_ICON}
                 
-                - title: WireGuard
-                  url: ${WG_EASY_DOMAIN_URL}
-                  check-url: ${WG_EASY_URL}
-                  icon: ${WG_EASY_ICON}
+            - title: WireGuard
+              url: ${WG_EASY_DOMAIN_URL}
+              check-url: ${WG_EASY_URL}
+              icon: ${WG_EASY_ICON}
 
-                - title: NGINX Proxy Manager
-                  url: ${NGINX_DOMAIN_URL}
-                  check-url: ${NGINX_URL}
-                  icon: ${NGINX_ICON}
+            - title: NGINX Proxy Manager
+              url: ${NGINX_DOMAIN_URL}
+              check-url: ${NGINX_URL}
+              icon: ${NGINX_ICON}
                 
-                - title: Pi-Hole
-                  url: ${PIHOLE_DOMAIN_URL}/admin
-                  check-url: ${PIHOLE_URL}/admin
-                  icon: ${PIHOLE_ICON}
+            - title: Pi-Hole
+              url: ${PIHOLE_DOMAIN_URL}/admin
+              check-url: ${PIHOLE_URL}/admin
+              icon: ${PIHOLE_ICON}
                 
-                - title: Jellyfin
-                  url: ${JELLYFIN_DOMAIN_URL}
-                  check-url: ${JELLYFIN_URL}
-                  icon: ${JELLYFIN_ICON}
+            - title: Jellyfin
+              url: ${JELLYFIN_DOMAIN_URL}
+              check-url: ${JELLYFIN_URL}
+              icon: ${JELLYFIN_ICON}
                 
-                - title: Uptime Kuma
-                  url: ${UPTIME_KUMA_DOMAIN_URL}
-                  check-url: ${UPTIME_KUMA_URL}
-                  icon: ${UPTIME_KUMA_ICON}
+            - title: Uptime Kuma
+              url: ${UPTIME_KUMA_DOMAIN_URL}
+              check-url: ${UPTIME_KUMA_URL}
+              icon: ${UPTIME_KUMA_ICON}
                 
-                - title: Speedtest Tracker
-                  url: ${SPEEDTEST_DOMAIN_URL}
-                  check-url: ${SPEEDTEST_URL}
-                  icon: ${SPEEDTEST_ICON}
+            - title: Speedtest Tracker
+              url: ${SPEEDTEST_DOMAIN_URL}
+              check-url: ${SPEEDTEST_URL}
+              icon: ${SPEEDTEST_ICON}
+              timeout: 30s
                 
-                - title: MC Aggregator
-                  url: ${MC_AGGREGATOR_DOMAIN_URL}/status
-                  check-url: ${MC_AGGREGATOR_URL}/status
-                  icon: ${MC_AGGREGATOR_ICON}
+            - title: MC Aggregator
+              url: ${MC_AGGREGATOR_DOMAIN_URL}/status
+              check-url: ${MC_AGGREGATOR_URL}/status
+              icon: ${MC_AGGREGATOR_ICON}
                 
         # - type: monitor
         #   cache: 1m
@@ -231,6 +238,7 @@
         - type: custom-api
           title: Speedtest Tracker
           cache: 1h
+          timeout: 30s
           url: ${SPEEDTEST_DOMAIN_URL}/api/v1/results/latest
           headers:
             Authorization: Bearer ${SPEEDTEST_TOKEN}
