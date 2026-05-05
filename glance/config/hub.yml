@@ -214,6 +214,7 @@
               url: ${MC_AGGREGATOR_DOMAIN_URL}/status
               check-url: ${MC_AGGREGATOR_URL}/status
               icon: ${MC_AGGREGATOR_ICON}
+              timeout: 30s
                 
         # - type: monitor
         #   cache: 1m
@@ -376,7 +377,7 @@
         # https://github.com/glanceapp/community-widgets/blob/main/widgets/portainer-dashboard/README.md
         - type: custom-api
           title: Portainer
-          cache: 1h
+          cache: 10m
           url: ${PORTAINER_DOMAIN_URL}/api/endpoints/${PORTAINER_ENDPOINT_ID}
           headers:
             X-API-Key: ${PORTAINER_API_KEY}
