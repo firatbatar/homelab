@@ -18,6 +18,10 @@ services:
         source: ${JELLYFIN_MEDIA_PATH?error}
         target: /media
         read_only: true
+      - type: bind
+        source: ${JELLYFIN_MEDIA_PATH_2?error}
+        target: /media2
+        read_only: true
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
       interval: 30s
