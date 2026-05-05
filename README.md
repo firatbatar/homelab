@@ -15,6 +15,7 @@ A personal homelab running self-hosted services via Docker Compose. Each service
 | **CPU** | Intel Celeron N4505 (2C/2T, up to 2.9GHz) |
 | **RAM** | 12GB DDR4 (2× DDR4 slots, max 64GB) |
 | **Storage** | KIOXIA EXCERIA 960GB SSD – 2.5” SATA III |
+| **External Storage** | 120GB SSD – 2.5” SATA III (via USB 3.0) |
 | **GPU** | Intel UHD Graphics (Quick Sync support) |
 | **Form Factor** | 190 × 165 × 49mm, Fanless, Metal chassis |
 | **Power** | 65W Adapter |
