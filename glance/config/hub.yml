@@ -193,7 +193,12 @@
               url: ${PIHOLE_DOMAIN_URL}/admin
               check-url: ${PIHOLE_URL}/admin
               icon: ${PIHOLE_ICON}
-                
+            
+            - title: Filebrowser
+              url: ${FB_DOMAIN_URL}
+              check_url: ${FB_URL}
+              icon: ${FB_ICON}
+
             - title: Jellyfin
               url: ${JELLYFIN_DOMAIN_URL}
               check-url: ${JELLYFIN_URL}
