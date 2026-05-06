@@ -6,7 +6,6 @@ services:
     container_name: jellyfin
     env_file: .env    
     environment:
-      - TZ=${TIMEZONE?error}
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_DOMAIN_URL?error}
     ports:
       - ${JELLYFIN_PORT?error}:8096/tcp
@@ -15,12 +14,8 @@ services:
       - ./config:/config
       - ./cache:/cache
       - type: bind
-        source: ${JELLYFIN_MEDIA_PATH?error}
-        target: /media
-        read_only: true
-      - type: bind
-        source: ${JELLYFIN_MEDIA_PATH_2?error}
-        target: /media2
+        source: ${SERVARR_DATA_PATH?error}/media
+        target: /data/media
         read_only: true
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8096/health"]

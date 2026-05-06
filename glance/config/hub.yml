@@ -213,7 +213,7 @@
               url: ${SPEEDTEST_DOMAIN_URL}
               check-url: ${SPEEDTEST_URL}
               icon: ${SPEEDTEST_ICON}
-              timeout: 30s
+              timeout: 1m
                 
             - title: MC Aggregator
               url: ${MC_AGGREGATOR_DOMAIN_URL}/status
@@ -221,21 +221,34 @@
               icon: ${MC_AGGREGATOR_ICON}
               timeout: 30s
                 
-        # - type: monitor
-        #   cache: 1m
-        #   title: Servarr
-        #   sites:
-#       - title: qBittorrent
-#         url: 
-#         check-url: 
-#         icon: di:qbittorrent
-#       - title: File Browser
-#         url: 
-#         icon: di:filebrowser
-#       - title: Portainer
-#         url: 
-#         check-url: 
-#         icon: di:portainer
+        - type: monitor
+          cache: 1m
+          title: Servarr
+          sites:
+            - title: qBittorrent
+              url: ${QBIT_DOMAIN_URL}
+              check-url: ${QBIT_URL}
+              icon: ${QBIT_ICON}
+
+            - title: Radarr
+              url: ${RADARR_DOMAIN_URL}
+              check-url: ${RADARR_URL}
+              icon: ${RADARR_ICON}
+
+            - title: Sonarr
+              url: ${SONARR_DOMAIN_URL}
+              check-url: ${SONARR_URL}
+              icon: ${SONARR_ICON}
+
+            - title: Bazarr
+              url: ${BAZARR_DOMAIN_URL}
+              check-url: ${BAZARR_URL}
+              icon: ${BAZARR_ICON}
+
+            - title: Prowlarr
+              url: ${PROWLARR_DOMAIN_URL}
+              check-url: ${PROWLARR_URL}
+              icon: ${PROWLARR_ICON}
 
     - size: small
       widgets:
@@ -244,7 +257,7 @@
         - type: custom-api
           title: Speedtest Tracker
           cache: 1h
-          timeout: 30s
+          timeout: 1m
           url: ${SPEEDTEST_DOMAIN_URL}/api/v1/results/latest
           headers:
             Authorization: Bearer ${SPEEDTEST_TOKEN}

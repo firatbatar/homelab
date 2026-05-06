@@ -1,0 +1,120 @@
+name: servarr
+
+services:
+  radarr:
+    container_name: radarr
+    hostname: radarr.internal
+    image: lscr.io/linuxserver/radarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - ${RADARR_PORT?error}:7878
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/radarr:/config
+      - ${SERVARR_DATA_PATH?error}:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+
+  sonarr:
+    container_name: sonarr
+    hostname: sonarr.internal
+    image: lscr.io/linuxserver/sonarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - ${SONARR_PORT?error}:8989
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/sonarr:/config
+      - ${SERVARR_DATA_PATH?error}:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8989"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+
+  bazarr:
+    container_name: bazarr
+    hostname: bazarr.internal
+    image: lscr.io/linuxserver/bazarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - ${BAZARR_PORT?error}:6767
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/bazarr:/config
+      - ${SERVARR_DATA_PATH?error}/media:/data/media
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6767"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s  
+
+  prowlarr:
+    container_name: prowlarr
+    hostname: prowlarr.internal
+    image: lscr.io/linuxserver/prowlarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - ${PROWLARR_PORT?error}:9696
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/prwolarr:/config
+      - ${SERVARR_DATA_PATH?error}:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9696"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+  
+  byparr:
+    container_name: byparr
+    hostname: byparr.internal
+    image: ghcr.io/thephaseless/byparr:latest
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${BYPARR_PORT}:8191"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8191"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s

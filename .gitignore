@@ -8,3 +8,5 @@ nginx-proxy-manager/data
 nginx-proxy-manager/letsencrypt
 wg-easy/config
 filebrowser/database.db
+qbittorrent/config
+servarr/config

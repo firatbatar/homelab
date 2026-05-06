@@ -1,0 +1,27 @@
+name: qbittorrent
+
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - WEBUI_PORT=${QBIT_WEB_PORT?error}
+      - TORRENTING_PORT=${QBIT_TORRENT_PORT?error}
+    volumes:
+      - ./config:/config
+      - ${SERVARR_DATA_PATH?error}/torrents:/data/torrents
+    ports:
+      - ${QBIT_WEB_PORT}:${QBIT_WEB_PORT}
+      - ${QBIT_TORRENT_PORT}:${QBIT_TORRENT_PORT}
+      - ${QBIT_TORRENT_PORT}:${QBIT_TORRENT_PORT}/udp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${QBIT_WEB_PORT}"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+    restart: unless-stopped
