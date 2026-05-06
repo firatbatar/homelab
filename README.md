@@ -62,6 +62,9 @@ Scheduled internet speed monitoring.
 #### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/portainer.svg" width="20"> [Portainer CE](https://www.portainer.io) `portainer/`
 Docker container management UI.
 
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/filebrowser.svg" width="20"> [File Browser](https://filebrowser.org) `filebrowser/`
+Web-based file manager for browsing and managing files on the server.
+
 ### Media
 
 #### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/jellyfin.svg" width="20"> [Jellyfin](https://jellyfin.org) `jellyfin/`
@@ -94,6 +97,9 @@ homelab/
 ├── nginx-proxy-manager/
 │   ├── data/
 │   ├── letsencrypt/
+│   └── docker-compose.yml
+├── filebrowser/
+│   ├── settings.json
 │   └── docker-compose.yml
 ├── pihole/
 │   ├── etc-pihole/
