@@ -14,6 +14,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config/radarr:/config
@@ -38,6 +41,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config/sonarr:/config
@@ -62,6 +68,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config/bazarr:/config
@@ -86,6 +95,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config/prwolarr:/config
@@ -107,6 +119,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     build:
       context: .
       dockerfile: Dockerfile
@@ -118,3 +133,19 @@ services:
       retries: 3
       start_period: 30s
       timeout: 10s
+
+  profilarr:
+    image: santiagosayshey/profilarr:latest # or :beta
+    container_name: profilarr
+    ports:
+      - ${PROFILARR_PORT?error}:6868
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    volumes:
+      - ./config/profilarr:/config
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped

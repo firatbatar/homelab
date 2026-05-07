@@ -249,6 +249,11 @@
               url: ${PROWLARR_DOMAIN_URL}
               check-url: ${PROWLARR_URL}
               icon: ${PROWLARR_ICON}
+            
+            - title: Prorfilarr
+              url: ${PROFILARR_DOMAIN_URL}
+              check-url: ${PROFILARR_URL}
+              icon: ${PROFILARR_ICON}
 
     - size: small
       widgets:
