@@ -225,6 +225,11 @@
           cache: 1m
           title: Servarr
           sites:
+            - title: Overseerr
+              url: ${OVERSEERR_DOMAIN_URL}
+              check-url: ${OVERSEERR_URL}
+              icon: ${OVERSEERR_ICON}
+            
             - title: qBittorrent
               url: ${QBIT_DOMAIN_URL}
               check-url: ${QBIT_URL}

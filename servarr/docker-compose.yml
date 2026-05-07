@@ -149,3 +149,27 @@ services:
       - PUID=1000
       - PGID=1000
     restart: unless-stopped
+  
+  overseerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: overseerr
+    env_file: .env
+    environment:
+      - LOG_LEVEL=debug
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - ${OVERSEERR_PORT}:5055
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    volumes:
+      - ./config/overseerr:/app/config
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+    restart: unless-stopped
