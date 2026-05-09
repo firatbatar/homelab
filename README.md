@@ -70,6 +70,34 @@ Web-based file manager for browsing and managing files on the server.
 #### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/jellyfin.svg" width="20"> [Jellyfin](https://jellyfin.org) `jellyfin/`
 Media server for movies, TV shows, and music.
 
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/qbittorrent.svg" width="20"> [qBittorrent](https://www.qbittorrent.org) `qbittorrent/`
+Torrent client.
+
+### Media Automation
+
+All services in this section run from a single `docker-compose.yml` in `servarr/` and share a common data path (`SERVARR_DATA_PATH`).
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/radarr.svg" width="20"> [Radarr](https://radarr.video) `servarr/`
+Automated movie download management.
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/sonarr.svg" width="20"> [Sonarr](https://sonarr.tv) `servarr/`
+Automated TV show download management.
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/bazarr.svg" width="20"> [Bazarr](https://www.bazarr.media) `servarr/`
+Subtitle management for Radarr and Sonarr.
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/prowlarr.svg" width="20"> [Prowlarr](https://github.com/Prowlarr/Prowlarr) `servarr/`
+Indexer aggregator that syncs with Radarr and Sonarr.
+
+#### [Byparr](https://github.com/thephaseless/byparr) `servarr/`
+Cloudflare bypass proxy used by Prowlarr to access protected indexers.
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/profilarr.svg" width="20"> [Profilarr](https://github.com/Dictionarry-Hub/profilarr) `servarr/`
+Quality profile and custom format manager for Radarr and Sonarr.
+
+#### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/overseerr.svg" width="20"> [Overseerr](https://overseerr.dev) `servarr/`
+Media request and discovery UI for users to request movies and TV shows.
+
 ### Custom
 
 #### <img src="https://raw.githubusercontent.com/firatbatar/dashboard-icons/refs/heads/main/svg/minecraft.svg" width="20"> MC Aggregator `mc-aggregator/`
@@ -111,6 +139,17 @@ homelab/
 │   └── docker-compose.yml
 ├── uptime-kuma/
 │   ├── data/
+│   └── docker-compose.yml
+├── qbittorrent/
+│   └── docker-compose.yml
+├── servarr/
+│   ├── config/
+│   │   ├── radarr/
+│   │   ├── sonarr/
+│   │   ├── bazarr/
+│   │   ├── prwolarr/
+│   │   ├── profilarr/
+│   │   └── overseerr/
 │   └── docker-compose.yml
 └── wg-easy/
     ├── config/
